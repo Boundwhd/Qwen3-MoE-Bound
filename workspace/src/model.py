@@ -76,12 +76,12 @@ class RopeEmbedding(nn.Module):
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
     config = QwenConfig()
-    RMSNorm_layer = RMSNorm(config)
+    RMSNorm_layer = RMSNorm(config).cuda()
     RopeEmbedding_layer = RopeEmbedding(config, device)
 
-    data = torch.randn([1, 10, 64], dtype=torch.float32)
+    data = torch.randn([1, 10, 64], dtype=torch.float32, device=device)
     print(data.device)
-    position = torch.arange(10).expand(1, -1)
+    position = torch.arange(10).expand(1, -1).cuda()
     cos, sin = RopeEmbedding_layer(data, position)
     print(sin[0,7,:10])
 
