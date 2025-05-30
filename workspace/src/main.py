@@ -1,0 +1,1 @@
+from transformers.models.qwen3 import Qwen3ForCausalLM
